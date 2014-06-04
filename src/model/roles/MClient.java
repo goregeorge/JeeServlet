@@ -93,7 +93,7 @@ public class MClient extends MUser{
 				Shoppingcarhistory newHistoryRegistry=new Shoppingcarhistory(this, product, (daoHistory.getAllShoppingCarHistory().size() + 1) , new Date(), quantity, (product.getPrize()*quantity), true);
 				
 				//Actualiza el historial de la base de datos, y actualiza el historial del cliente
-				daoHistory.create(newHistoryRegistry);
+				daoHistory.createRegistry(newHistoryRegistry);
 				setHistory(daoHistory.getHistory(this));
 				
 				//actualiza la cantidad del producto cuando fue comprado
@@ -121,7 +121,7 @@ public class MClient extends MUser{
 				Wishlist wish=new Wishlist(product, this, quantity+"");
 				
 				//Guarda el registro en la bd y en el cliente
-				daowish.updateWishListRegistry(wish);
+				daowish.createWishlistRegistry(wish);
 				setWishList(daowish.getWishListFromUser(this));
 				
 				//actualiza la informacion del producto
@@ -149,7 +149,7 @@ public class MClient extends MUser{
 				Shoppingcarhistory newHistoryRegistry=new Shoppingcarhistory(this, product, idCart , new Date(), quantity, (product.getPrize()*quantity), false);
 				
 				//Actualiza el historial de la base de datos, y actualiza el historial del cliente
-				daoHistory.create(newHistoryRegistry);
+				daoHistory.createRegistry(newHistoryRegistry);
 				setHistory(daoHistory.getHistory(this));
 				
 				//actualiza la cantidad del producto cuando fue comprado
@@ -171,7 +171,7 @@ public class MClient extends MUser{
 			registry.setIsBuyed(true);
 			
 			//Actualizando la base de datos y el historial y carrito del cliente
-			daoshop.update(registry);
+			daoshop.updateRegistry(registry);
 			setHistory(daoshop.getHistory(this));
 			setShoppingCar(daoshop.getShoppingCar(this));
 			
@@ -195,7 +195,7 @@ public class MClient extends MUser{
 			Shoppingcarhistory registro= new Shoppingcarhistory(this, product, idCart, new Date(), Integer.valueOf(registry.getQuantity()), ( product.getPrize() * Integer.valueOf(registry.getQuantity()) ), false);
 			
 			//Guardando en bd el registro de carrito de compra
-			daoshop.create(registro);
+			daoshop.createRegistry(registro);
 			
 			//eliminando el registro de la wishlist de la bd
 			daowish.deleteWishListRegistry(registry);
@@ -233,15 +233,18 @@ public class MClient extends MUser{
 	}
 	
 	public boolean deleteRegistryFromShoppingCar(Shoppingcarhistory registry){
-		try{
+//		try{
 			DAOShoppingCarAndHistory daoshop=new DAOShoppingCarAndHistory();
 			DAOProducts daoproduct=new DAOProducts();
 			
 			//Eliminando el registro de la base de datos
-			daoshop.delete(registry);			
+			MUser user=(new DAOUsuarios()).getUserById(registry.getId().getUserIdUser(), registry.getId().isUserType());
+			Product product=daoproduct.getProduct(registry.getId().getProductIdProduct());
+			Shoppingcarhistory reg=daoshop.getRegistryById(registry.getId().getIdcart(),user, product);
+			daoshop.deleteRegistry(reg);
 			
 			//Actualizando datos del producto
-			Product product=daoproduct.getProduct(registry.getId().getProductIdProduct());
+			product=daoproduct.getProduct(registry.getId().getProductIdProduct());
 			product.setQuantity(product.getQuantity() + registry.getQuantity());
 			daoproduct.updateProduct(product);
 			
@@ -249,9 +252,9 @@ public class MClient extends MUser{
 			setShoppingCar(daoshop.getShoppingCar(this));		
 			
 			return true;
-		}catch(Exception e){
-			return false;
-		}
+//		}catch(Exception e){
+//			return false;
+//		}
 	}
 	
 	public boolean setNewPayment(Payment payment){

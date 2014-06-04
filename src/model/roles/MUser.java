@@ -43,7 +43,7 @@ public abstract class MUser {
 		this.birthDate = birthDate;
 	}
 	
-	public boolean isAdmin(){
+	public boolean isType(){
 		return this.type;
 	}
 

@@ -25,8 +25,8 @@ public class Shoppingcarhistory implements java.io.Serializable {
 	
 	public Shoppingcarhistory(MUser user, Product product, int idCart, Date date, int quantity, float total, boolean isBuyed) {
 		
-		ShoppingcarhistoryId id=new ShoppingcarhistoryId(user.getId(), user.isAdmin(), product.getIdProduct(), idCart );
-		User entitieU=new User(user.getId(), user.isAdmin(), user.getUserName(), user.getPassWord(), user.getName(), user.getLastName(), user.getEmail(), user.getBirthDate());
+		ShoppingcarhistoryId id=new ShoppingcarhistoryId(user.getId(), user.isType(), product.getIdProduct(), idCart );
+		User entitieU=new User(user.getId(), user.isType(), user.getUserName(), user.getPassWord(), user.getName(), user.getLastName(), user.getEmail(), user.getBirthDate());
 		
 		this.id = id;
 		this.product = product;

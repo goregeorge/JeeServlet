@@ -51,7 +51,4 @@ public class Console  implements java.io.Serializable {
         this.products = products;
     }
 
-
-
-
 }

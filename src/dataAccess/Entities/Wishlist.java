@@ -19,8 +19,8 @@ public class Wishlist implements java.io.Serializable {
 	}
 	
 	public Wishlist(Product product, MUser user, String quantity) {
-		WishlistId id=new WishlistId(user.getId(), user.isAdmin(), product.getIdProduct());
-		User entitieU=new User(user.getId(), user.isAdmin(), user.getUserName(), user.getPassWord(), user.getName(), user.getLastName(), user.getEmail(), user.getBirthDate());
+		WishlistId id=new WishlistId(user.getId(), user.isType(), product.getIdProduct());
+		User entitieU=new User(user.getId(), user.isType(), user.getUserName(), user.getPassWord(), user.getName(), user.getLastName(), user.getEmail(), user.getBirthDate());
 		
 		this.id = id;
 		this.product = product;

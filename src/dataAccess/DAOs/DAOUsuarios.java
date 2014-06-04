@@ -22,6 +22,25 @@ public class DAOUsuarios extends DAO{
 		return getMUserFromEntitie(result);
 	}
 	
+	public MUser getUser(String userName, String passWord){
+		List<MUser> all=getAllUsers();
+		
+		MUser result=null;
+		MUser temp;
+		for(int i=0; i<all.size(); i++){
+			temp=all.get(i);
+			if(temp.getUserName().equals(userName)){
+				result=temp;
+				break;
+			}
+		}
+		
+		if(result!=null && result.getPassWord().equals(passWord)){
+			return result;
+		}else return null;
+		
+	}
+	
 	public List<MUser> getAllUsers(){
 		List<User> users = getAll(User.class);
 		
@@ -34,8 +53,10 @@ public class DAOUsuarios extends DAO{
 		return resultUsers;
 	}
 	
-	public void createUser(MUser user){
-		create( getEntitieFromMUser(user) );
+	public MUser createUser(MUser user){
+		User newUser=getEntitieFromMUser(user);
+		create(newUser);
+		return getUserById(newUser.getId().getIdUser(), newUser.getId().isType());
 	}
 	
 	public void updateUser(MUser user){
@@ -43,18 +64,18 @@ public class DAOUsuarios extends DAO{
 	}
 	
 	public void deleteUser(MUser user){
-		MUser userdelete=getUserById(user.getId(), user.isAdmin());
+		MUser userdelete=getUserById(user.getId(), user.isType());
 		
 		delete( getEntitieFromMUser(userdelete) );
 	}
 	
-	public List<MUser> getAllCliets(){
+	public List<MClient> getAllCliets(){
 		List<MUser> all=getAllUsers();
-		List<MUser> result=new ArrayList<MUser>();
+		List<MClient> result=new ArrayList<MClient>();
 		
 		for(int i=0; i<all.size(); i++){
-			if(!all.get(i).isAdmin()){
-				result.add(all.get(i));
+			if(!all.get(i).isType()){
+				result.add((MClient)all.get(i));
 			}
 		}
 		
@@ -87,7 +108,7 @@ public class DAOUsuarios extends DAO{
 	}
 	
 	public User getEntitieFromMUser(MUser user){
-		return new User(((user.getId()==-1)?(getAllUsers().size()+1):user.getId()), user.isAdmin(), user.getUserName(), user.getPassWord(), user.getName(),
+		return new User(((user.getId()==-1)?(getAllUsers().size()+1):user.getId()), user.isType(), user.getUserName(), user.getPassWord(), user.getName(),
 			user.getLastName(), user.getEmail(), user.getBirthDate());
 	}
 	

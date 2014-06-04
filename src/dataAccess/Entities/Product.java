@@ -4,6 +4,7 @@ package dataAccess.Entities;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -21,7 +22,7 @@ public class Product implements java.io.Serializable {
 	private String image;
 	private Set wishlists = new HashSet(0);
 	private Set shoppingcarhistories = new HashSet(0);
-	private Set consoles = new HashSet(0);
+	private Set<Console> consoles = new HashSet<Console>(0);
 
 	public Product() {
 	}

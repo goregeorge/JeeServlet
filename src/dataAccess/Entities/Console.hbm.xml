@@ -11,7 +11,7 @@
         <property name="company" type="string">
             <column name="Company" length="45" not-null="true" />
         </property>
-        <set name="products" table="product_console" inverse="false" lazy="true" fetch="select">
+        <set name="products" table="product_console" inverse="true" lazy="true" fetch="join">
             <key>
                 <column name="Console_idConsole" not-null="true" />
             </key>

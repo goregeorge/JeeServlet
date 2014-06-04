@@ -14,7 +14,7 @@ public class DAOWishList extends DAO{
 
 	public Wishlist getWishListById(MUser user, Product product){
 		
-		WishlistId id=new WishlistId(user.getId(), user.isAdmin(), product.getIdProduct());
+		WishlistId id=new WishlistId(user.getId(), user.isType(), product.getIdProduct());
 		
 		Session s=getSession();
 		Wishlist result=(Wishlist) s.get(Wishlist.class, id);

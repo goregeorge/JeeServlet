@@ -41,7 +41,7 @@
             </key>
             <one-to-many class="dataAccess.Entities.Shoppingcarhistory" />
         </set>
-        <set name="consoles" table="product_console" inverse="false" lazy="true" fetch="select">
+        <set name="consoles" table="product_console" inverse="true" lazy="true" fetch="join">
             <key>
                 <column name="Product_idProduct" not-null="true" />
             </key>
