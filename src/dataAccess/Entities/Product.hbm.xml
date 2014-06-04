@@ -26,6 +26,9 @@
         <property name="creationDate" type="date">
             <column name="CreationDate" length="10" not-null="true" />
         </property>
+        <property name="image" type="string">
+        	<column name="image" length="100" not-null="true" />
+        </property>
         <set name="wishlists" table="wishlist" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="Product_idProduct" not-null="true" />

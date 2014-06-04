@@ -18,6 +18,7 @@ public class Product implements java.io.Serializable {
 	private int stars;
 	private int quantity;
 	private Date creationDate;
+	private String image;
 	private Set wishlists = new HashSet(0);
 	private Set shoppingcarhistories = new HashSet(0);
 	private Set consoles = new HashSet(0);
@@ -26,7 +27,7 @@ public class Product implements java.io.Serializable {
 	}
 
 	public Product(int idProduct, String name, String desc, float prize,
-			int stars, int quantity, Date creationDate) {
+			int stars, int quantity, Date creationDate, String image) {
 		this.idProduct = idProduct;
 		this.name = name;
 		this.desc = desc;
@@ -34,10 +35,11 @@ public class Product implements java.io.Serializable {
 		this.stars = stars;
 		this.quantity = quantity;
 		this.creationDate = creationDate;
+		this.image = image;
 	}
 
 	public Product(int idProduct, String name, String desc, float prize,
-			int stars, int quantity, Date creationDate, Set wishlists,
+			int stars, int quantity, Date creationDate, String image, Set wishlists,
 			Set shoppingcarhistories, Set consoles) {
 		this.idProduct = idProduct;
 		this.name = name;
@@ -46,6 +48,7 @@ public class Product implements java.io.Serializable {
 		this.stars = stars;
 		this.quantity = quantity;
 		this.creationDate = creationDate;
+		this.image = image;
 		this.wishlists = wishlists;
 		this.shoppingcarhistories = shoppingcarhistories;
 		this.consoles = consoles;
@@ -105,6 +108,14 @@ public class Product implements java.io.Serializable {
 
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
+	}
+	
+	public String getImage(){
+		return this.image;
+	}
+	
+	public void setImage(String image){
+		this.image=image;
 	}
 
 	public Set getWishlists() {
