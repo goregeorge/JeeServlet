@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/05/2014 12:05:07 AM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="dataAccess.Entities.Wishlist" table="wishlist" catalog="jeedb">
+        <composite-id name="id" class="dataAccess.Entities.WishlistId">
+            <key-property name="userIdUser" type="int">
+                <column name="User_idUser" />
+            </key-property>
+            <key-property name="userType" type="boolean">
+                <column name="User_Type" />
+            </key-property>
+            <key-property name="productIdProduct" type="int">
+                <column name="Product_idProduct" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="product" class="dataAccess.Entities.Product" update="false" insert="false" fetch="select">
+            <column name="Product_idProduct" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="dataAccess.Entities.User" update="false" insert="false" fetch="select">
+            <column name="User_idUser" not-null="true" />
+            <column name="User_Type" not-null="true" />
+        </many-to-one>
+        <property name="quantity" type="string">
+            <column name="Quantity" length="45" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

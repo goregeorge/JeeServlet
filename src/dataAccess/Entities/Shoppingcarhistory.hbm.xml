@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/05/2014 12:05:07 AM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="dataAccess.Entities.Shoppingcarhistory" table="shoppingcarhistory" catalog="jeedb">
+        <composite-id name="id" class="dataAccess.Entities.ShoppingcarhistoryId">
+            <key-property name="userIdUser" type="int">
+                <column name="User_idUser" />
+            </key-property>
+            <key-property name="userType" type="boolean">
+                <column name="User_Type" />
+            </key-property>
+            <key-property name="productIdProduct" type="int">
+                <column name="Product_idProduct" />
+            </key-property>
+            <key-property name="idcart" type="int">
+                <column name="IDCart" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="product" class="dataAccess.Entities.Product" update="false" insert="false" fetch="select">
+            <column name="Product_idProduct" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="dataAccess.Entities.User" update="false" insert="false" fetch="select">
+            <column name="User_idUser" not-null="true" />
+            <column name="User_Type" not-null="true" />
+        </many-to-one>
+        <property name="date" type="date">
+            <column name="Date" length="10" not-null="true" />
+        </property>
+        <property name="quantity" type="int">
+            <column name="Quantity" not-null="true" />
+        </property>
+        <property name="total" type="float">
+            <column name="Total" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="isBuyed" type="boolean">
+            <column name="isBuyed" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

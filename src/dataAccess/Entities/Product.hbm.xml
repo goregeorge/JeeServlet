@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/05/2014 12:05:07 AM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="dataAccess.Entities.Product" table="product" catalog="jeedb">
+        <id name="idProduct" type="int">
+            <column name="idProduct" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="Name" length="45" not-null="true" />
+        </property>
+        <property name="desc" type="string">
+            <column name="Description" length="500" not-null="true" />
+        </property>
+        <property name="prize" type="float">
+            <column name="Prize" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="stars" type="int">
+            <column name="Stars" not-null="true" />
+        </property>
+        <property name="quantity" type="int">
+            <column name="Quantity" not-null="true" />
+        </property>
+        <property name="creationDate" type="date">
+            <column name="CreationDate" length="10" not-null="true" />
+        </property>
+        <set name="wishlists" table="wishlist" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Product_idProduct" not-null="true" />
+            </key>
+            <one-to-many class="dataAccess.Entities.Wishlist" />
+        </set>
+        <set name="shoppingcarhistories" table="shoppingcarhistory" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Product_idProduct" not-null="true" />
+            </key>
+            <one-to-many class="dataAccess.Entities.Shoppingcarhistory" />
+        </set>
+        <set name="consoles" table="product_console" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="Product_idProduct" not-null="true" />
+            </key>
+            <many-to-many entity-name="dataAccess.Entities.Console">
+                <column name="Console_idConsole" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

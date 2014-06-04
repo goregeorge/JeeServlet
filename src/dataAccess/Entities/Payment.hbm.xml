@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/05/2014 12:05:07 AM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="dataAccess.Entities.Payment" table="payment" catalog="jeedb">
+        <id name="idPayment" type="int">
+            <column name="idPayment" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="user" class="dataAccess.Entities.User" fetch="select">
+            <column name="User_idUser" not-null="true" />
+            <column name="User_Type" not-null="true" />
+        </many-to-one>
+        <property name="type" type="boolean">
+            <column name="type" not-null="true" />
+        </property>
+        <property name="noCard" type="int">
+            <column name="NoCard" not-null="true" />
+        </property>
+        <property name="expDate" type="date">
+            <column name="ExpDate" length="10" not-null="true" />
+        </property>
+        <property name="ownerName" type="string">
+            <column name="OwnerName" length="200" not-null="true" />
+        </property>
+        <property name="controlCode" type="int">
+            <column name="ControlCode" not-null="true" />
+        </property>
+        <property name="zipCode" type="int">
+            <column name="ZipCode" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
